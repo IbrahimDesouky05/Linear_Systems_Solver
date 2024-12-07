@@ -1,0 +1,4 @@
+## Gaussian Elimination Method
+Step 1 --> Create a square matrix
+Step 2 --> inverse it
+Step 3 --> Multiply inverse matrix with the solution of system
