@@ -1,51 +1,52 @@
+###############################################
+############### Gaussian Seidel ###############
+###############################################
+# - This file has a helper functions          #
+# - This file has 1 main functions            #
+# - The main Function calls the two helper    #
+#   functions solving the given matrix using  #
+#   Gaussian Seidel Iterative                 #
+###############################################
+# Libraries used #
 import numpy as np
+import math_helper_functions as m_h_f
 
+################ Helper Functions #############
 
-def diagonally_dominate(m, v):
-    m = np.array(m)
-    v = np.array(v)
+# This helper function takes corrected matrix, size, corrected solution vector, number of iterations needed, if needed(starting vector) respectively and applies gauss seidel method to it returning answer vector
+def gauss(matrix, size, v, iterations, strt_value = None):
 
-    n = np.hstack((m, v))
-    k = len(m)
-
-    for i in range(k):
-        if abs(m[i][i]) < abs(np.sum(m[i])):
-            for j in range(i + 1, k):
-                if abs(m[j][i]) > abs(np.sum(m[j]) - m[j][i]):
-                    n[j], n[i] = n[i].copy(), n[j].copy()
-
-    v = n[:,k]
-    n = n[:,:-1]
-
-    return n, v, k
-
-
-def gaus(matrix, size, v, iterations, strt_value = None):
-
-    if strt_value is None:
+    if strt_value is None:                          # Checks that There isn't any passed initial vector, if none is passed it starts from zero vector
         x = np.zeros(size, dtype=float)
-    elif np.isscalar(strt_value):  # If initial_guess is a single number
+    elif np.isscalar(strt_value):                   # If initial_guess is a single number, it completes the rest as zeros
         x = np.full(size, strt_value, dtype=float)
-    else:  # Otherwise, assume it's already an array or list
+    else:                                           # Otherwise, a starting vector is given
         x = np.array(strt_value, dtype=float)
 
-    # Iterative process
-    for k in range(iterations):
-        for i in range(size):
+    # Iterative process for gauss seidel method
+    for k in range(iterations):     # Repeats for the number of times required by the user
+        for i in range(size):       # Loops for rows
             # Sum the terms for the ith equation except the diagonal term
             summ = 0.0
-            for j in range(size):
-                if j != i:
-                    summ += matrix[i][j] * x[j]
+            for j in range(size):   # Loops for columns
+                if j != i:          # Checks for diagonal element
+                    summ += matrix[i][j] * x[j]     # Summation multiplied by the values of initial vector
 
             # Update the ith value using the most recent values
             x[i] = (v[i].item() - summ) / matrix[i][i].item()
 
-    return x
+    return x        # Return answer vector
 
-def gauss_seidel_method(matrix, v, iterations,starting_values = None):
 
-    mat, vect, size = diagonally_dominate(matrix, v)
-    ans_vect = gaus(mat, size, vect, iterations,starting_values)
+################ Main Function ################
 
-    return ans_vect
+def gauss_seidel_method(matrix, v, iterations,starting_values = None):      # This function utilizes the 2 helper functions to solve the given matrix using gauss seidel
+
+    mat, vect, size = m_h_f.diagonally_dominate(matrix, v)                        # Call of Helper function 1
+    ans_vect = gauss(mat, size, vect, iterations,starting_values)           # Call of Helper function 2
+
+    return ans_vect         # Return of answer vector
+
+###############################################
+################## The End ####################
+###############################################

@@ -2,3 +2,21 @@
 Step 1 --> Create a square matrix
 Step 2 --> inverse it
 Step 3 --> Multiply inverse matrix with the solution of system
+#jacobian diagonally dominant
+def diagonally_dominate(m, v):
+    m = np.array(m)
+    v = np.array(v)
+
+    n = np.hstack((m, v))
+    k = len(m)
+
+    for i in range(k):
+        if abs(m[i][i]) < abs(np.sum(m[i])):
+            for j in range(i + 1, k):
+                if abs(m[j][i]) > abs(np.sum(m[j]) - m[j][i]):
+                    n[j], n[i] = n[i].copy(), n[j].copy()
+
+    v = n[:,k]
+    n = n[:,:-1]
+
+    return n, v, k

@@ -5,7 +5,7 @@ import jacobi_method as jm
 import gauss_seidel_method as gsm
 
 mat,size = ih.InputMatrix()
-vec = ih.inputVector()
+vec = ih.entryVector()
 iterations = ih.iterationNumber()
 gs_vector = ih.gs_vector()
 ans1 = ge.GaussElimination(mat,vec)
