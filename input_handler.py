@@ -22,6 +22,22 @@ def invertableMatrix(mat):
         return False
 
 
+def iterationNumber():
+
+    i = int(input("Enter number of iterations needed for iterative methods"))
+
+    return i
+
+
+def gs_vector():
+
+    choice = input("Do you want a starting vector? (y/n) ")
+
+    if choice == "y":
+        v = inputVector()
+        return v
+
+
 def InputMatrix():
 
     mat, size = enrtyMatrix()
