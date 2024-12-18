@@ -10,6 +10,9 @@
 # Libraries used #
 import numpy as np
 import math_helper_functions as m_h_f
+import numpy as np
+import matplotlib.pyplot as plt
+import math_helper_functions as m_h_f
 
 ############## a Helper Functions #############
 
@@ -17,8 +20,18 @@ def dotProduct(Imat, Sln_Vector):       # This function multiplies the inverted 
 
     ans_vector = np.dot(Imat, Sln_Vector)       # The multiplication step of inverted matrix and the solution vector
     return ans_vector       # Returns the answer vector
-
-
+############## Plotting Iterations Function 
+def plot_iterations_vs_efficiency(iterations, efficiencies):
+    """
+    Plots the number of iterations against efficiency.
+    """
+    plt.figure(figsize=(8, 6))
+    plt.plot(iterations, efficiencies, marker='o', linestyle='-', color='b')
+    plt.title("Gaussian Elimination: Iterations vs Efficiency")
+    plt.xlabel("Number of Iterations")
+    plt.ylabel("Efficiency (%)")
+    plt.grid(True)
+    plt.show()
 ################ Main Function ################
 def GaussElimination(matrix, v):        # This function utilizes the 2 helper functions to solve the given matrix using gaussian elimination
 

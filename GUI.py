@@ -1,41 +1,114 @@
 import tkinter as tk
+from tkinter import messagebox 
 
-# Main window
+# Helper function to convert matrix input from string to integer
+def get_matrix_values(entry_fields, rows, cols):
+    matrix = []
+    for i in range(rows):
+        row = []
+        for j in range(cols):
+            try:
+                value = int(entry_fields[i][j].get())  
+                row.append(value)
+            except ValueError:
+                row.append(0) 
+        matrix.append(row)
+    print("Matrix:", matrix) 
+    return matrix
+
+# Function to generate matrix input fields dynamically
+def generate_matrix_fields():
+    try:
+        rows = int(rows_entry.get())
+        cols = int(cols_entry.get())
+        
+        # Validation for square matrices
+        if rows != cols:
+            messagebox.showerror("Input Error", "Only square matrices are allowed (e.g., 3x3, 4x4).")
+            return
+    except ValueError:
+        result_label.config(text="Invalid size input. Enter numbers only.")
+        return
+
+    for widget in matrix_frame.winfo_children():
+        widget.destroy()
+
+    global entry_fields
+    entry_fields = []
+    for i in range(rows):
+        row_entries = []
+        for j in range(cols):
+            entry = tk.Entry(matrix_frame, width=5, font=("Helvetica", 12), justify="center")
+            entry.grid(row=i, column=j, padx=2, pady=2)
+            row_entries.append(entry)
+        entry_fields.append(row_entries)
+
+    submit_button = tk.Button(
+        matrix_frame,
+        text="Submit Matrix",
+        bg=colors["accent"],
+        fg="white",
+        command=lambda: get_matrix_values(entry_fields, rows, cols)
+    )
+    submit_button.grid(row=rows, column=0, columnspan=cols, pady=10)
+
+# Main Tkinter Window
 root = tk.Tk()
-root.title("Solving Linear System of Equations ")
-root.geometry("1200x800")  # Set the size of the window
+root.title("Solving Linear System")
+root.geometry("1000x700")
 
-# Color Palette 
+# Define Colors
 colors = {
-    "background": "#F1F3F5",   # Light Gray
-    "primary": "#007BFF",      # Blue
-    "accent": "#20C997",       # Teal
-    "text": "#343A40",         # Dark Gray
-    "error": "#D32F2F",        # Red
+    "background": "#F1F3F5",
+    "primary": "#007BFF",
+    "accent": "#20C997",
+    "text": "#343A40",
+    "error": "#D32F2F",
 }
+
 root.configure(bg=colors["background"])
 
 # Title Label
-title_label = tk.Label(root,text="Solving Linear Systems",font=("Helvetica",25,"bold"),bg=colors["background"],fg=colors["primary"])
+title_label = tk.Label(
+    root,
+    text="Solving Linear Systems",
+    font=("Helvetica", 16, "bold"),
+    bg=colors["background"],
+    fg=colors["primary"]
+)
 title_label.pack(pady=10)
 
-# Entry box
-entry = tk.Entry(root,font=("Helvetica",35), bg='white',fg=colors["text"],highlightbackground=colors["primary"],highlightthickness=2,width=50)
-entry.pack(pady=10,padx=10)
+# Input Section for Rows and Columns
+input_frame = tk.Frame(root, bg=colors["background"])
+input_frame.pack(pady=10)
 
-# Test Function for the button
-def on_button_click():
-    text = entry.get()
-    title_label.config(text=f"Hello, {text}!")
+tk.Label(input_frame, text="Rows:", font=("Helvetica", 12), bg=colors["background"]).grid(row=0, column=0)
+rows_entry = tk.Entry(input_frame, width=5, font=("Helvetica", 12))
+rows_entry.grid(row=0, column=1, padx=10)
 
-# Solve button
-solve_button = tk.Button(root,text='Solve',font=("Helvetica",16),fg=colors["primary"],bg='white',activeforeground='white',activebackground=colors['primary'],relief='flat',highlightthickness=0, height=2,width=15,bd=(0),command=on_button_click,cursor='hand2')
-solve_button.pack(pady=15)
+tk.Label(input_frame, text="Columns:", font=("Helvetica", 12), bg=colors["background"]).grid(row=0, column=2)
+cols_entry = tk.Entry(input_frame, width=5, font=("Helvetica", 12))
+cols_entry.grid(row=0, column=3, padx=10)
 
-# Error Label 
-error_label = tk.Label(root,text='Invalid Input',font=("Helvetica",15),bg=colors['background'],fg=colors['error'])
-error_label.pack(pady=5)
-error_label.pack_forget() 
-##
-# Start the GUI event loop
+generate_button = tk.Button(
+    input_frame,
+    text="Generate Matrix",
+    bg=colors["accent"],
+    fg="white",
+    command=generate_matrix_fields
+)
+generate_button.grid(row=0, column=4, padx=10)
+
+matrix_frame = tk.Frame(root, bg=colors["background"])
+matrix_frame.pack(pady=10)
+
+result_label = tk.Label(
+    root,
+    text="",
+    font=("Helvetica", 12),
+    bg=colors["background"],
+    fg=colors["error"]
+)
+result_label.pack()
+
 root.mainloop()
