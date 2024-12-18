@@ -10,11 +10,11 @@ import numpy as np
 
 def enrtyMatrix():      # This function allows user to enter a matrix
 
-    rows = int(input("Enter size of matrix"))       # Inputs the matrix size
+    rows = int(input("Enter size of matrix: "))       # Inputs the matrix size
 
     matrix = []         # Initializes an empty matrix
 
-    print("Enter the elements row by row, separated by spaces:")
+    print("Enter the elements row by row, separated by spaces: ")
 
     for i in range(rows):       # Loops for each row
 
@@ -45,7 +45,7 @@ def invertibleMatrix(mat):      # This function checks if the matrix is singular
 
 def iterationNumber():      # Allows User to input the number of iterations needed
 
-    i = int(input("Enter number of iterations needed for iterative methods"))
+    i = int(input("Enter number of iterations needed for iterative methods: "))
 
     return i
 
@@ -78,7 +78,7 @@ def entryVector():      # This function allows user to input a vector
 
     v = []      # Initializes an empty Vector
 
-    row = list(map(float, input("Enter the elements row by row, separated by spaces:").split()))  # Convert space-separated input to a list of integers
+    row = list(map(float, input("Enter the elements row by row, separated by spaces: ").split()))  # Convert space-separated input to a list of integers
 
     v.append(row)           # Adds the input data to the empty vector
     v = np.array(v)         # Converts the vector to the standard format
