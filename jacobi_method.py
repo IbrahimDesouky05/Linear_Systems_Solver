@@ -9,20 +9,30 @@
 ###############################################
 # Libraries used #
 import numpy as np
-import matplotlib.pyplot as plt
 import math_helper_functions as m_h_f
+import time
 
 ############## Helper Functions #############
 
 # This helper function takes a corrected matrix, size, corrected solution vector,
 # and the number of iterations, applying the Jacobi method and tracking progress.
-def jacob(matrix, size, v, iterations):
-    x = np.zeros(size)  # Initialize the initial vector as zero
+def jacob(matrix, size, v, exact_sln, strt_value=None):
+
+    if strt_value is None:  # No initial vector passed, start from zero vector
+        x = np.zeros(size, dtype=float)
+    elif np.isscalar(strt_value):  # If initial guess is a single number, initialize all elements with it
+        x = np.full(size, strt_value, dtype=float)
+    else:  # Otherwise, use the provided starting vector
+        x = np.array(strt_value, dtype=float)
+
+    # Stopping flag
+    flag = True
 
     solution_progress = [x.copy()]  # Store solution progress for plotting
 
     # Iterative process
-    for k in range(iterations):     # Repeat for the specified number of iterations
+    while flag:     # Repeat for the specified number of iterations
+
         x_new = np.copy(x)          # Copy the starting conditions
 
         for i in range(size):       # Loop through rows
@@ -37,45 +47,27 @@ def jacob(matrix, size, v, iterations):
 
         # Update the solution for the next iteration
         x = np.copy(x_new)
+
+        flag = m_h_f.check_done(size, exact_sln, x)
         solution_progress.append(x.copy())  # Store solution progress
 
     return x, solution_progress  # Return the final answer vector and progress
 
 
-# Function to plot the convergence of solutions
-def plot_convergence(solution_progress):
-    """
-    Plots the solution values at each iteration to show convergence.
-    """
-    iterations = len(solution_progress)
-    solution_progress = np.array(solution_progress).T  # Transpose for easier plotting
-
-    plt.figure(figsize=(8, 6))
-    for i, solution in enumerate(solution_progress):
-        plt.plot(range(iterations), solution, marker='o', linestyle='-', label=f'Variable {i+1}')
-
-    plt.title("Convergence of Jacobi Method")
-    plt.xlabel("Iteration")
-    plt.ylabel("Solution Values")
-    plt.legend()
-    plt.grid(True)
-    plt.show()
-
-
 ################ Main Function ################
 
-def jacobian_method(matrix, v, iterations=3):
-    """
-    Solves a system of linear equations using the Jacobi method
-    and plots the convergence of solutions.
-    """
+def jacobian_method(matrix, v, exact_sln, strt_value=None):
+
     mat, vect, size = m_h_f.diagonally_dominate(matrix, v)  # Call helper function
-    ans_vect, solution_progress = jacob(mat, size, vect, iterations)  # Call helper function
+    ans_vect, solution_progress = jacob(mat, size, vect,exact_sln,strt_value)  # Call helper function
+
+    iteration_count = len(solution_progress)
 
     # Plot convergence of solutions
-    plot_convergence(solution_progress)
+    m_h_f.plot_convergence(solution_progress, "Convergence of Jacobian Method")
 
-    return ans_vect  # Return the final solution vector
+
+    return ans_vect, iteration_count # Return the final solution vector
 
 ###############################################
 ################## The End ####################

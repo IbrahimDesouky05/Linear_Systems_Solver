@@ -20,3 +20,44 @@ def diagonally_dominate(m, v):
     n = n[:,:-1]
 
     return n, v, k
+
+########################################################################################
+    # Helper function to extract matrix values
+def get_matrix_values(entry_fields, rows, cols):
+    matrix = []
+    for i in range(rows):
+        row = []
+        for j in range(cols):
+            try:
+                value = int(entry_fields[i][j].get())
+                row.append(value)
+            except ValueError:
+                row.append(0)
+        matrix.append(row)
+    return matrix
+
+# Helper function to extract vector values
+def get_vector_values(vector_fields, rows):
+    vector = []
+    for i in range(rows):
+        try:
+            value = float(vector_fields[i].get())
+            vector.append(value)
+        except ValueError:
+            vector.append(0.0)
+    return vector
+########################################################################
+def generate_matrix_fields(rows, cols):
+    for widget in matrix_frame.winfo_children():
+        widget.destroy()
+
+    global entry_fields
+    entry_fields = []
+
+    for i in range(rows):
+        row_entries = []
+        for j in range(cols):
+            entry = tk.Entry(matrix_frame, width=5, font=("Helvetica", 12), justify="center")
+            entry.grid(row=i, column=j, padx=2, pady=2)
+            row_entries.append(entry)
+        entry_fields.append(row_entries)
