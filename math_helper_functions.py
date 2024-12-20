@@ -18,6 +18,7 @@ def inverseMatrix(mat):  # This function receives a matrix that we have already 
 
 def diagonally_dominate(m, v):      # This helper function makes the matrix given diagonally dominant
     m = np.array(m)         # Makes sure that the matrix given is in the required format
+    m2 = abs(np.array(m))
     v = np.array(v)         # Makes sure that the vector given is in the required format
 
     v = v.reshape(-1,1)     # VERY IMPORTANT This line allows the conversion between the format of the GUI and the Format of the math functions
@@ -27,9 +28,10 @@ def diagonally_dominate(m, v):      # This helper function makes the matrix give
 
     # This loop takes the diagonal element and checks that it is bigger than the sum of the other elements in this row, if not it inter-changes the rows with a row that has the diagonal element bigger than the sum of the other elements in this row
     for i in range(k):                                          # iterates for the columns
-        if abs(m[i][i]) < abs(np.sum(m[i])):                    # Checks for the diagonally dominant condition
+        #print(abs(np.sum(m[i])), abs(m[i][i]))                 # used in debugging
+        if abs(m2[i][i]) < abs(np.sum(m2[i]) - m2[i][i]):                    # Checks for the diagonally dominant condition
             for j in range(i + 1, k):                           # iterates for the rows
-                if abs(m[j][i]) > abs(np.sum(m[j]) - m[j][i]):  # Checks that |diagonal value| > |Sum(all row elements except diagonal one)|
+                if abs(m2[j][i]) > abs(np.sum(m2[j]) - m2[j][i]):  # Checks that |diagonal value| > |Sum(all row elements except diagonal one)|
                     n[j], n[i] = n[i].copy(), n[j].copy()       # Interchanging the required rows
 
     v = n[:,k]                                                  # Extracts the solution vector again

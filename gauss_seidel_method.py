@@ -39,7 +39,7 @@ def gauss(matrix, size, v, exact_sln, strt_value=None):
             summ = 0.0
             for j in range(size):                   # Loop through columns
                 if j != i:                          # Exclude diagonal element
-                    summ += matrix[i][j] * x[j]     # Summation of terms
+                    summ = summ + (matrix[i][j] * x[j])     # Summation of terms
 
             # Update the ith value using the most recent values
             x[i] = (v[i].item() - summ) / matrix[i][i].item()
