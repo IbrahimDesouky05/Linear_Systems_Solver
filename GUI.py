@@ -121,6 +121,7 @@ def generate_input_fields():
         return
 
     clear_frame(ans_frame)
+    clear_frame(strt_vector_frame)
     col = generate_matrix_fields(rows, cols)
     generate_vector_fields(rows, 0)
 

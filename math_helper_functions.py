@@ -41,9 +41,14 @@ def check_done(size, exact_sln, current_sln):
 
     count = 0
     stop_crit = 0.00005
+    epsilon = 1e-18
 
     for i in range (size):
-        error_value = (exact_sln[i] - current_sln[i]) / exact_sln[i]
+        if exact_sln[i] != 0:
+            error_value = (exact_sln[i] - current_sln[i]) / exact_sln[i]
+        else:
+            error_value = (exact_sln[i] - current_sln[i]) / epsilon
+
         if abs(error_value) <= abs(stop_crit):
             count = count + 1
 

@@ -2,6 +2,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 from reportlab.platypus import Table, TableStyle
+from reportlab.lib.colors import black
 from datetime import datetime
 import os
 
@@ -34,7 +35,9 @@ def create_footer(c, width, page_num):
 def draw_matrix(c, matrix, start_x, start_y):
     """Draws a matrix with brackets on the PDF."""
     c.setFont("Helvetica", 12)
+    c.setFillColor(black)
     c.drawString(start_x - 50, start_y + 10, "Matrix (A):")
+    c.line(start_x - 50, start_y + 10 - 5, start_x + len("Matrix (A):") - 5, start_y + 10 - 5)
 
     shit_y = -25
 
@@ -78,7 +81,9 @@ def draw_vector(c, vector, start_x, start_y, title):
     c.line(closing_x + shift_x, start_y - (len(vector) * 15) - 10 + shift_y, closing_x - 5 + shift_x, start_y - (len(vector) * 15) - 10 + shift_y)
 
     c.setFont("Helvetica", 12)
+    c.setFillColor(black)
     c.drawString(start_x, start_y + 10 , title)
+    c.line(start_x, start_y + 10 - 5, start_x + (len(title) * 4.8), start_y + 10 - 5)
     # Draw vector content
     for i, val in enumerate(vector):
         c.drawString(start_x + 75, start_y - 5 - i * 20 + shift_y, f"{val}")
@@ -89,7 +94,9 @@ def draw_vector(c, vector, start_x, start_y, title):
 def draw_solutions_table(c, start_x, start_y, width, height, solutions, methods):
     # Set the font and title for the table
     c.setFont("Helvetica", 12)
+    c.setFillColor(black)
     c.drawString(start_x - 25, start_y, "Solutions:")
+    c.line(start_x - 25, start_y - 5, start_x + len("Solutions") + 25, start_y - 5)
 
     # Create the header row for the table
     table_data = [["Method", "Solution (Vector)", "Time (ms)", "Iterations"]]

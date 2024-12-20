@@ -16,15 +16,15 @@ def all_math_functions(mat, vec, size, strt_vector = None):
     t3 = timeit.timeit(lambda: gsm.gauss_seidel_method(mat,vec,ans1,strt_vector), number=1) * 1000
     t4 = timeit.timeit(lambda: jm.jacobian_method(mat,vec,ans1,strt_vector), number=1) * 1000
 
-    ans1 = [f"{x:.10g}" for x in ans1]
-    ans2 = [f"{x:.10g}" for x in ans2]
-    ans3 = [f"{x:.10g}" for x in ans3]
-    ans4 = [f"{x:.10g}" for x in ans4]
+    ans1 = [f"{x:.6g}" for x in ans1]
+    ans2 = [f"{x:.6g}" for x in ans2]
+    ans3 = [f"{x:.6g}" for x in ans3]
+    ans4 = [f"{x:.6g}" for x in ans4]
 
-    t1 = format(t1, ".10f")
-    t2 = format(t2, ".10f")
-    t3 = format(t3, ".10f")
-    t4 = format(t4, ".10f")
+    t1 = format(t1, ".6f")
+    t2 = format(t2, ".6f")
+    t3 = format(t3, ".6f")
+    t4 = format(t4, ".6f")
 
     #print(ans1, t1, ans2, t2, ans3, i1, t3, ans4, i2, t4)      # Used to debug
 
