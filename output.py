@@ -64,7 +64,7 @@ def draw_matrix(c, matrix, start_x, start_y):
 def draw_vector(c, vector, start_x, start_y, title):
     """Draws a vector on the PDF."""
 
-    shift_x = 10
+    shift_x = 20
     shift_y = -25
 
     end_vect = 0
