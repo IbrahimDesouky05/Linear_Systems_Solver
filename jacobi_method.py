@@ -69,6 +69,3 @@ def jacobian_method(matrix, v, exact_sln, strt_value=None):
 
     return ans_vect, iteration_count # Return the final solution vector
 
-###############################################
-################## The End ####################
-###############################################

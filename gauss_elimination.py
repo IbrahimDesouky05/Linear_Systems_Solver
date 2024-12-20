@@ -42,6 +42,3 @@ def GaussElimination(matrix, v):        # This function utilizes the 2 helper fu
 
     return V     # Return of answer vector
 
-###############################################
-################## The End ####################
-###############################################

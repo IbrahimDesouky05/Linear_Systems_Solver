@@ -51,41 +51,37 @@ def iterationNumber():      # Allows User to input the number of iterations need
 
 
 
-def gs_vector():            # Allows User to choice whether he needs initial vector
+def gs_vector():            
 
-    choice = input("Do you want a starting vector? (y/n): ")         # Takes User choice
+    choice = input("Do you want a starting vector? (y/n): ")         
 
     if choice == "y":
-        v = entryVector()       # Calls input vector function to input vector
+        v = entryVector()       
         return v
 
 
 
-def InputMatrix():      # This function utilizes the entryMatrix, invertibleMatrix functions to enter the function only and then does the needed checks on it
+def InputMatrix():      
 
-    mat, size = enrtyMatrix()       # Call of entryMatrix function
-    invertableFlag = invertibleMatrix(mat)      # Checks whether the matrix is invertible or not
-
-    while invertableFlag:       # Loops until user enters a usable matrix
+    mat, size = enrtyMatrix()       
+    invertableFlag = invertibleMatrix(mat)     
+    while invertableFlag:       
         mat, size = enrtyMatrix()
         invertableFlag = invertibleMatrix(mat)
 
-    return mat, size        # Returns  matrix, size respectively
+    return mat, size       
 
 
 
-def entryVector():      # This function allows user to input a vector
+def entryVector():     
 
-    v = []      # Initializes an empty Vector
+    v = []      
 
     row = list(map(float, input("Enter the elements row by row, separated by spaces: ").split()))  # Convert space-separated input to a list of integers
 
-    v.append(row)           # Adds the input data to the empty vector
-    v = np.array(v)         # Converts the vector to the standard format
-    v = v.reshape(-1, 1)    # Flips the Vector so that it can be used correctly
+    v.append(row)           
+    v = np.array(v)        
+    v = v.reshape(-1, 1)    
 
-    return v        # Returns the vector
+    return v        
 
-###############################################
-################## The End ####################
-###############################################

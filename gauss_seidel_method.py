@@ -65,6 +65,3 @@ def gauss_seidel_method(matrix, v, exact_sln, starting_values=None):
 
     return ans_vect, iteration_count # Return answer vector
 
-###############################################
-################## The End ####################
-###############################################
