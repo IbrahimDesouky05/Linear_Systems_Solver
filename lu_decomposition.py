@@ -11,6 +11,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math_helper_functions as m_h_f
+import time
 
 ############## 2 Helper Functions #############
 
@@ -69,22 +70,19 @@ def plot_lu_progression(progression):
 ################ Main Function ################
 
 def lu(matrix, size, V):        
-    """
-    Solves a system of linear equations using LU decomposition
-    and visualizes the progression of the U matrix.
-    """
+
     L, U, progression = lu_decomposition(matrix, size)  
 
     # Plot the decomposition progression
-    plot_lu_progression(progression)
+    #plot_lu_progression(progression)       # Canceled 3ashan eh de ya me3alem
 
     # Calculate solution
     L_inverse = m_h_f.inverseMatrix(L)  
     U_inverse = m_h_f.inverseMatrix(U)  
 
-    ans_vector = np.dot(U_inverse, np.dot(L_inverse, V))  
+    ans_vector = np.dot(U_inverse, np.dot(L_inverse, V))
 
-    return ans_vector  
+    return ans_vector
 
 
 ###############################################

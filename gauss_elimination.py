@@ -9,8 +9,6 @@
 ###############################################
 # Libraries used #
 import numpy as np
-import math_helper_functions as m_h_f
-import numpy as np
 import matplotlib.pyplot as plt
 import math_helper_functions as m_h_f
 
@@ -35,10 +33,14 @@ def plot_iterations_vs_efficiency(iterations, efficiencies):
 ################ Main Function ################
 def GaussElimination(matrix, v):        # This function utilizes the 2 helper functions to solve the given matrix using gaussian elimination
 
+
     i_m = m_h_f.inverseMatrix(matrix)         # Call of Helper function 1
     V = dotProduct(i_m, v)              # Call of Helper function 2
 
-    return(V)       # Return of answer vector
+
+
+
+    return V     # Return of answer vector
 
 ###############################################
 ################## The End ####################
