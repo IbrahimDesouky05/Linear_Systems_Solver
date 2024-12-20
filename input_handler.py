@@ -8,31 +8,30 @@
 import numpy as np
 
 
-def enrtyMatrix():      # This function allows user to enter a matrix
+def enrtyMatrix():     
+    
+    rows = int(input("Enter size of matrix: "))       
 
-    rows = int(input("Enter size of matrix: "))       # Inputs the matrix size
-
-    matrix = []         # Initializes an empty matrix
+    matrix = []         
 
     print("Enter the elements row by row, separated by spaces: ")
 
-    for i in range(rows):       # Loops for each row
+    for i in range(rows):      
 
-        row = list(map(int, input(f"Row {i+1}: ").split()))  # Convert space-separated input to a list of integers (row)
+        row = list(map(int, input(f"Row {i+1}: ").split()))  
 
-        while len(row) < rows:  # If no value is added it completes it with zeros
+        while len(row) < rows: 
             row.append(0)
 
-        matrix.append(row)      # Adds the entered row to the matrix
+        matrix.append(row)      
+        
+    return matrix,rows          
 
-    return matrix,rows          # Returns the matrix, size respectively
 
 
+def invertibleMatrix(mat):      
 
-def invertibleMatrix(mat):      # This function checks if the matrix is singular
-
-    det = np.linalg.det(mat)        # Checking determinant to check for the singularity of matrix
-
+    det = np.linalg.det(mat)        
     # If determinant  = 0       -----> Matrix Not Invertible
     # If determinant  =! 0       -----> Matrix Invertible
 
@@ -43,7 +42,7 @@ def invertibleMatrix(mat):      # This function checks if the matrix is singular
 
 
 
-def iterationNumber():      # Allows User to input the number of iterations needed
+def iterationNumber():     
 
     i = int(input("Enter number of iterations needed for iterative methods: "))
 
