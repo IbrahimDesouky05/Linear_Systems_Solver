@@ -124,7 +124,7 @@ def generate_input_fields():
     clear_frame(strt_vector_frame)
     col = generate_matrix_fields(rows, cols)
     generate_vector_fields(rows, 0)
-    generate_solve_button()
+    #generate_solve_button()
 
 # Function to generate solve button
 def generate_solve_button():
@@ -309,29 +309,7 @@ def setup_gui(root):
     ans_frame = tk.Frame(root, bg=colors["background"])
     ans_frame.pack(pady=10)
 
-    # Made as a function
-    # # Submit Button
-    # solve_button = tk.Button(
-    #     root,
-    #     text="Solve",
-    #     bg=colors["primary"],
-    #     fg="white",
-    #     font=("Helvetica", 12, "bold"),
-    #     command=handle_solve
-    # )
-    # solve_button.pack(pady = 20)
-
-    # Made as a function
-    # # Pdf Button
-    # pdf_button = tk.Button(
-    #     root,
-    #     text="Create PDF",
-    #     bg=colors["primary"],
-    #     fg="white",
-    #     font=("Helvetica", 12, "bold"),
-    #     command=handle_solve
-    # )
-    # pdf_button.pack(pady=20)
+    generate_solve_button()
 
     # Result Label
     result_label = tk.Label(
