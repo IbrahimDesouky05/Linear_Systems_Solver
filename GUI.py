@@ -124,6 +124,20 @@ def generate_input_fields():
     clear_frame(strt_vector_frame)
     col = generate_matrix_fields(rows, cols)
     generate_vector_fields(rows, 0)
+    generate_solve_button()
+
+# Function to generate solve button
+def generate_solve_button():
+    # Solve Button
+    solve_button = tk.Button(
+        root,
+        text="Solve",
+        bg=colors["primary"],
+        fg="white",
+        font=("Helvetica", 12, "bold"),
+        command=handle_solve
+    )
+    solve_button.pack(pady = 20)
 
 # Function to handle Submit button action
 def handle_solve():
@@ -179,11 +193,13 @@ def handle_solve():
 
     create_pdf("Matrix Solution Report.pdf",matrix,vector,sol,methods,start_vector)
 
+# Function to clear the given frame
 def clear_frame(parent_frame):
     # Clear the parent frame
     for widget in parent_frame.winfo_children():
         widget.destroy()
 
+# Function to display the given vector
 def display_vector_in_column(parent_frame, label, vector, col):
 
     # Clear the parent frame
@@ -221,6 +237,7 @@ def display_vector_in_column(parent_frame, label, vector, col):
         row = idx + length + 1
     return row
 
+# Function to display the given value
 def display_value(parent_frame, title,val, row, col):
 
     tk.Label(
@@ -292,19 +309,19 @@ def setup_gui(root):
     ans_frame = tk.Frame(root, bg=colors["background"])
     ans_frame.pack(pady=10)
 
-    # Submit Button
-    solve_button = tk.Button(
-        root,
-        text="Solve",
-        bg=colors["primary"],
-        fg="white",
-        font=("Helvetica", 12, "bold"),
-        command=handle_solve
-    )
-    solve_button.pack(pady = 20)
+    # Made as a function
+    # # Submit Button
+    # solve_button = tk.Button(
+    #     root,
+    #     text="Solve",
+    #     bg=colors["primary"],
+    #     fg="white",
+    #     font=("Helvetica", 12, "bold"),
+    #     command=handle_solve
+    # )
+    # solve_button.pack(pady = 20)
 
-    # Integrated With Solve Button
-
+    # Made as a function
     # # Pdf Button
     # pdf_button = tk.Button(
     #     root,

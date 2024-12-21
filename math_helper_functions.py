@@ -28,7 +28,7 @@ def diagonally_dominate(m, v):      # This helper function makes the matrix give
 
     # This loop takes the diagonal element and checks that it is bigger than the sum of the other elements in this row, if not it inter-changes the rows with a row that has the diagonal element bigger than the sum of the other elements in this row
     for i in range(k):                                          # iterates for the columns
-        print(abs(m2[i][i]), abs(np.sum(m2[i]) - m2[i][i]))                 # used in debugging
+        #print(abs(m2[i][i]), abs(np.sum(m2[i]) - m2[i][i]))                 # used in debugging
         if abs(m2[i][i]) < abs(np.sum(m2[i]) - m2[i][i]):                    # Checks for the diagonally dominant condition
             for j in range(i + 1, k):                           # iterates for the rows
                 if abs(m2[j][i]) > abs(np.sum(m2[j]) - m2[j][i]):  # Checks that |diagonal value| > |Sum(all row elements except diagonal one)|
