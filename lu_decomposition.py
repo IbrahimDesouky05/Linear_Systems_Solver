@@ -16,10 +16,7 @@ import time
 ############## 2 Helper Functions #############
 
 def lu_decomposition(matrix, size):     
-    """
-    Decomposes a matrix into L (lower triangular) and U (upper triangular) matrices.
-    Tracks the progression for visualization.
-    """
+
     # Convert the input to a NumPy array used format
     matrix = np.array(matrix, dtype=float)
 
@@ -45,26 +42,24 @@ def lu_decomposition(matrix, size):
 
 ################### Plot Function ###################
 
-def plot_lu_progression(progression):
-    """
-    Plots the progression of the U matrix as LU decomposition is performed.
-    Each step shows the U matrix evolving towards upper triangular form.
-    """
-    num_steps = len(progression)
-    fig, axes = plt.subplots(1, num_steps, figsize=(num_steps * 4, 4))
-
-    if num_steps == 1:  # Handle single-step case
-        axes = [axes]
-
-    for idx, U_matrix in enumerate(progression):
-        ax = axes[idx]
-        cax = ax.matshow(U_matrix, cmap='viridis')
-        fig.colorbar(cax, ax=ax)
-        ax.set_title(f"Step {idx + 1}")
-        ax.axis('off')
-
-    plt.suptitle("LU Decomposition Progression (U Matrix)")
-    plt.show()
+# Cancelled
+# def plot_lu_progression(progression):
+#
+#     num_steps = len(progression)
+#     fig, axes = plt.subplots(1, num_steps, figsize=(num_steps * 4, 4))
+#
+#     if num_steps == 1:  # Handle single-step case
+#         axes = [axes]
+#
+#     for idx, U_matrix in enumerate(progression):
+#         ax = axes[idx]
+#         cax = ax.matshow(U_matrix, cmap='viridis')
+#         fig.colorbar(cax, ax=ax)
+#         ax.set_title(f"Step {idx + 1}")
+#         ax.axis('off')
+#
+#     plt.suptitle("LU Decomposition Progression (U Matrix)")
+#     plt.show()
 
 
 ################ Main Function ################
@@ -74,7 +69,7 @@ def lu(matrix, size, V):
     L, U, progression = lu_decomposition(matrix, size)  
 
     # Plot the decomposition progression
-    #plot_lu_progression(progression)       # Canceled 3ashan eh de ya me3alem
+    #plot_lu_progression(progression)       # Canceled
 
     # Calculate solution
     L_inverse = m_h_f.inverseMatrix(L)  
