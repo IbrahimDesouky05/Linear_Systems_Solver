@@ -166,7 +166,7 @@ def create_pdf(file_name, matrix, vector, solutions, methods, inital_conditions)
     c = canvas.Canvas(file_name, pagesize=letter)
     width, height = letter
 
-    # Add components
+    # Creation of the first page
     create_header(c, width, height)
     create_footer(c, width, "Page 1")
     end_y = draw_matrix(c, matrix, 100, height - 120)
@@ -174,7 +174,7 @@ def create_pdf(file_name, matrix, vector, solutions, methods, inital_conditions)
     end_vector = draw_vector(c, inital_conditions, 50,end_y - 20,"Initial conditions:")
     draw_solutions_table(c, 75, end_vector - 80, width, height, solutions, methods)
 
-
+    # Creation of the second page
     c.showPage()
     create_header(c, width, height)
     create_footer(c, width, "Page 2")
