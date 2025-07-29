@@ -28,7 +28,7 @@ def create_footer(c, width, page_num):
     c.setFont("Helvetica", 10)
     c.setFillColor(colors.grey)
     c.drawString(50, 25, page_num)
-    c.drawString(475, 25, "Dr Amani Elgammal")
+    c.drawString(525, 25, "CUFE")
     c.setFillColor(colors.grey)
     c.line(50, 45, width - 50, 45)  # Footer line
 
@@ -161,7 +161,7 @@ def draw_image(c,file_name, x, y, width, height):
 
     c.drawImage(image_path, x, y, width, height)
 
-def create_pdf(file_name, matrix, vector, solutions, methods, inital_conditions):
+def create_pdf(file_name, matrix, vector, solutions, methods, inital_conditions, m):
 
     c = canvas.Canvas(file_name, pagesize=letter)
     width, height = letter
@@ -173,13 +173,13 @@ def create_pdf(file_name, matrix, vector, solutions, methods, inital_conditions)
     draw_vector(c, vector, 400, height - 120, "Vector (b): ")
     end_vector = draw_vector(c, inital_conditions, 50,end_y - 20,"Initial conditions:")
     draw_solutions_table(c, 75, end_vector - 80, width, height, solutions, methods)
-
-    # Creation of the second page
-    c.showPage()
-    create_header(c, width, height)
-    create_footer(c, width, "Page 2")
-    draw_image(c, "Convergence of Gauss-Seidel Method.png", 100, height - 400, 400, 300)
-    draw_image(c, "Convergence of Jacobian Method.png", 100, 100, 400, 300)
+    if m == 1:
+        # Creation of the second page
+        c.showPage()
+        create_header(c, width, height)
+        create_footer(c, width, "Page 2")
+        draw_image(c, "Convergence of Gauss-Seidel Method.png", 100, height - 400, 400, 300)
+        draw_image(c, "Convergence of Jacobian Method.png", 100, 100, 400, 300)
 
     # Save the PDF
     c.save()

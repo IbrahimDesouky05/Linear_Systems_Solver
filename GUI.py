@@ -164,34 +164,49 @@ def handle_solve():
     # print("Matrix Submitted:", matrix)        # Used in debugging
     # print("Vector Submitted:", vector)        # Used in debugging
     result_label.config(text="Matrix and Vector submitted successfully!", fg=colors["text"])
-    ans1, ans2, ans3, ans4, i1, i2, t1, t2, t3, t4 = math.all_math_functions(matrix, vector, size)
+    ans1, ans2, ans3, ans4, i1, i2, t1, t2, t3, t4, m = math.all_math_functions(matrix, vector, size)
     #clear_frame(vector_frame)
     clear_frame(ans_frame)
     clear_frame(result_label)
 
-    display_vector_in_column(ans_frame, "Gaussian Elimination:", ans1, 0)
-    display_vector_in_column(ans_frame, "LU Decomposition:", ans2, 2)
-    display_vector_in_column(ans_frame, "Gauss Seidel:", ans3, 4)
-    end = display_vector_in_column(ans_frame, "Jacobian:", ans4, 6) + 1
+    if m == 1:
+        display_vector_in_column(ans_frame, "Gaussian Elimination:", ans1, 0)
+        display_vector_in_column(ans_frame, "LU Decomposition:", ans2, 2)
+        display_vector_in_column(ans_frame, "Gauss Seidel:", ans3, 4)
+        end = display_vector_in_column(ans_frame, "Jacobian:", ans4, 6) + 1
 
-    display_value(ans_frame, "Time (ms):", t1, end, 0)
-    display_value(ans_frame, "Time (ms):", t2, end, 2)
-    display_value(ans_frame, "Time (ms):", t3, end, 4)
-    display_value(ans_frame, "Time (ms):", t4, end, 6)
+        display_value(ans_frame, "Time (ms):", t1, end, 0)
+        display_value(ans_frame, "Time (ms):", t2, end, 2)
+        display_value(ans_frame, "Time (ms):", t3, end, 4)
+        display_value(ans_frame, "Time (ms):", t4, end, 6)
 
-    display_value(ans_frame, "Iterations:", i1, end + 1, 4)
-    display_value(ans_frame, "Iterations:",i2, end + 1, 6)
+        display_value(ans_frame, "Iterations:", i1, end + 1, 4)
+        display_value(ans_frame, "Iterations:",i2, end + 1, 6)
 
-    sol = [ans1, ans2, ans3, ans4]
+        sol = [ans1, ans2, ans3, ans4]
 
-    methods = {
-        "Gauss Elimination": {"time": t1, "iterations": 0},
-        "LU Decomposition": {"time": t2, "iterations": 0},
-        "Gauss Seidel": {"time": t3, "iterations": i1},
-        "Jacobian": {"time": t4, "iterations": i2}
-    }
+        methods = {
+            "Gauss Elimination": {"time": t1, "iterations": 0},
+            "LU Decomposition": {"time": t2, "iterations": 0},
+            "Gauss Seidel": {"time": t3, "iterations": i1},
+            "Jacobian": {"time": t4, "iterations": i2}
+        }
 
-    create_pdf("Matrix Solution Report.pdf",matrix,vector,sol,methods,start_vector)
+    elif m == 0:
+        display_vector_in_column(ans_frame, "Gaussian Elimination:", ans1, 0)
+        end = display_vector_in_column(ans_frame, "LU Decomposition:", ans2, 2)
+
+        display_value(ans_frame, "Time (ms):", t1, end, 0)
+        display_value(ans_frame, "Time (ms):", t2, end, 2)
+
+        sol = [ans1, ans2]
+
+        methods = {
+            "Gauss Elimination": {"time": t1, "iterations": 0},
+            "LU Decomposition": {"time": t2, "iterations": 0}
+        }
+
+    create_pdf("Matrix Solution Report.pdf",matrix,vector,sol,methods,start_vector,m)
 
 # Function to clear the given frame
 def clear_frame(parent_frame):
