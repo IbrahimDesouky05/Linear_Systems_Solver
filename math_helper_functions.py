@@ -15,7 +15,6 @@ def inverseMatrix(mat):  # This function receives a matrix that we have already 
     return inv_mat  # Returns the inverse of the matrix
 
 
-
 def diagonally_dominate(m, v):      # This helper function makes the matrix given diagonally dominant
     m = np.array(m)         # Makes sure that the matrix given is in the required format
     m2 = abs(np.array(m))
@@ -24,20 +23,27 @@ def diagonally_dominate(m, v):      # This helper function makes the matrix give
     v = v.reshape(-1,1)     # VERY IMPORTANT This line allows the conversion between the format of the GUI and the Format of the math functions
     n = np.hstack((m, v))   # Appends the vector to the end of the matrix so that when the rows inter change they vector values are updated
     k = len(m)              # Gets the number of rows in the matrix
+    state = 1               # Assumes initially that matrix can be made diagonally dominant
     # NB:: n is now the matrix that contains the (matrix + solution vector) that we are going to work on
 
     # This loop takes the diagonal element and checks that it is bigger than the sum of the other elements in this row, if not it inter-changes the rows with a row that has the diagonal element bigger than the sum of the other elements in this row
     for i in range(k):                                          # iterates for the columns
         #print(abs(m2[i][i]), abs(np.sum(m2[i]) - m2[i][i]))                 # used in debugging
         if abs(m2[i][i]) < abs(np.sum(m2[i]) - m2[i][i]):                    # Checks for the diagonally dominant condition
+            found = False
             for j in range(i + 1, k):                           # iterates for the rows
                 if abs(m2[j][i]) > abs(np.sum(m2[j]) - m2[j][i]):  # Checks that |diagonal value| > |Sum(all row elements except diagonal one)|
                     n[j], n[i] = n[i].copy(), n[j].copy()       # Interchanging the required rows
+                    m2[j], m2[i] = m2[i].copy(), m2[j].copy()   # Update the absolute matrix accordingly
+                    found = True
+                    break
+            if not found:
+                state = 0                                       # If no suitable row is found, matrix can't be made diagonally dominant
 
     v = n[:,k]                                                  # Extracts the solution vector again
     n = n[:,:-1]                                                # Removes the solution vector from the corrected matrix
 
-    return n, v, k      # Returns the corrected matrix, corrected vector, size respectively
+    return n, v, k, state     # Returns the corrected matrix, corrected vector, size respectively, and state of diagonally dominance
 
 def check_done(size, exact_sln, current_sln):
 

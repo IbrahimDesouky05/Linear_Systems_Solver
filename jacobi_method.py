@@ -58,7 +58,7 @@ def jacob(matrix, size, v, exact_sln, strt_value=None):
 
 def jacobian_method(matrix, v, exact_sln, strt_value=None):
 
-    mat, vect, size = m_h_f.diagonally_dominate(matrix, v)  # Call helper function
+    mat, vect, size, m = m_h_f.diagonally_dominate(matrix, v)  # Call helper function
     ans_vect, solution_progress = jacob(mat, size, vect,exact_sln,strt_value)  # Call helper function
 
     iteration_count = len(solution_progress)

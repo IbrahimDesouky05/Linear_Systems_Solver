@@ -54,7 +54,7 @@ def gauss(matrix, size, v, exact_sln, strt_value=None):
 
 def gauss_seidel_method(matrix, v, exact_sln, starting_values=None):
 
-    mat, vect, size = m_h_f.diagonally_dominate(matrix, v)  # Call of Helper function 1
+    mat, vect, size, m = m_h_f.diagonally_dominate(matrix, v)  # Call of Helper function 1
     ans_vect, solution_progress = gauss(mat, size, vect, exact_sln, starting_values)  # Call of Helper function 2
 
     iteration_count = len(solution_progress)
